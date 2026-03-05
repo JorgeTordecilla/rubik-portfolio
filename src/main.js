@@ -7,12 +7,13 @@ import { renderProjects } from './sections/projects.js';
 import { initStats } from './sections/stats.js';
 import { initMagneticButtons } from './animations/magneticButton.js';
 import { initGradientMesh } from './animations/gradientMesh.js';
+import { initDividerAnimation } from './animations/divider.js';
 
-/* ─── Theme ────────────────────────────── */
+/* ─── Theme ──────────────────────────────────── */
 document.documentElement.dataset.theme = 'dark';
 let rubikCube;
 
-/* ─── Custom cursor ───────────────────────── */
+/* ─── Custom cursor ────────────────────────────── */
 const cursorDot  = document.getElementById('cursor-dot');
 const cursorRing = document.getElementById('cursor-ring');
 let cx = -200, cy = -200;
@@ -38,7 +39,7 @@ if (cursorDot && cursorRing) {
   });
 }
 
-/* ─── Mouse tilt for cube ───────────────────── */
+/* ─── Mouse tilt for cube ─────────────────────────── */
 let mouseNX = 0, mouseNY = 0;
 let mouseTiltX = 0, mouseTiltY = 0;
 window.addEventListener('mousemove', (e) => {
@@ -46,11 +47,11 @@ window.addEventListener('mousemove', (e) => {
   mouseNY = (e.clientY / window.innerHeight - 0.5) * 2;
 }, { passive: true });
 
-/* ─── Scroll tracking ──────────────────────── */
+/* ─── Scroll tracking ───────────────────────────── */
 let lastScrollTime = Date.now();
 window.addEventListener('scroll', () => { lastScrollTime = Date.now(); }, { passive: true });
 
-/* ─── Section nav observer ────────────────────── */
+/* ─── Section nav observer ─────────────────────────── */
 const snavItems = document.querySelectorAll('#section-nav .snav-item');
 if (snavItems.length) {
   const sectionObs = new IntersectionObserver(
@@ -67,7 +68,7 @@ if (snavItems.length) {
   document.querySelectorAll('section[id]').forEach(s => sectionObs.observe(s));
 }
 
-/* ─── Loader ────────────────────────────── */
+/* ─── Loader ──────────────────────────────────── */
 const loader     = document.getElementById('loader');
 const loaderFill = document.querySelector('.loader-fill');
 let   loadProgress = 0;
@@ -84,7 +85,7 @@ const fakeLoad = setInterval(() => {
   }
 }, 80);
 
-/* ─── Three.js scene ───────────────────────── */
+/* ─── Three.js scene ────────────────────────────── */
 const canvas = document.getElementById('rubik-canvas');
 const { scene, camera, renderer } = createScene(canvas);
 
@@ -100,21 +101,22 @@ function resizeRenderer() {
 requestAnimationFrame(resizeRenderer);
 window.addEventListener('resize', resizeRenderer, { passive: true });
 
-/* ─── Cube ─────────────────────────────── */
+/* ─── Cube ────────────────────────────────────── */
 rubikCube = new RubikCube(scene);
 rubikCube.setTheme('dark');
 
-/* ─── Sections ────────────────────────────── */
+/* ─── Sections ──────────────────────────────────── */
 renderSkills();
 renderProjects();
 initStats();
 initMagneticButtons();
 initGradientMesh();
+initDividerAnimation();
 
-/* ─── Scroll → solve cube ────────────────────── */
+/* ─── Scroll → solve cube ─────────────────────────── */
 initScrollController(rubikCube);
 
-/* ─── Contact: cube glow + hide float pill ────────── */
+/* ─── Contact: cube glow + hide float pill ──────────────── */
 const contactEl    = document.getElementById('contact');
 const contactFloat = document.getElementById('contact-float');
 if (contactEl) {
@@ -130,7 +132,7 @@ if (contactEl) {
   }, { threshold: 0.3 }).observe(contactEl);
 }
 
-/* ─── Scroll reveal ─────────────────────────── */
+/* ─── Scroll reveal ─────────────────────────────── */
 const ro = new IntersectionObserver(
   (entries) => entries.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); }
@@ -139,7 +141,7 @@ const ro = new IntersectionObserver(
 );
 document.querySelectorAll('.fade-up').forEach(el => ro.observe(el));
 
-/* ─── Animate loop ──────────────────────────── */
+/* ─── Animate loop ──────────────────────────────── */
 const IDLE_DELAY = 1800;
 let idleVelocity = 0;
 let sceneRotY    = 0;

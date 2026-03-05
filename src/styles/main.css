@@ -211,26 +211,32 @@ section {
   section { scroll-snap-stop: always; }
 }
 
-/* ─── Section top glow divider — abierto donde pasa el cubo ── */
+/* ─── Section glow divider — gap controlled by JS via --divider-gap ── */
+section:not(#hero) {
+  --divider-gap: 0%;
+}
 section:not(#hero)::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   height: 1px;
+  /*
+   * The gradient has two "wings" that meet at center when --divider-gap = 0%.
+   * JS sets --divider-gap (0% → ~20%) based on cube proximity,
+   * smoothly opening a hole for the cube to pass through.
+   */
   background: linear-gradient(
     to right,
-    transparent 0%,
-    rgba(94, 245, 194, 0.35) 8%,
-    rgba(94, 245, 194, 0.65) 20%,
-    var(--accent-border) 32%,
-    transparent 40%,
-    transparent 60%,
-    var(--accent-border) 68%,
-    rgba(94, 245, 194, 0.65) 80%,
-    rgba(94, 245, 194, 0.35) 92%,
-    transparent 100%
+    transparent                                         0%,
+    var(--accent-border)                                6%,
+    rgba(94, 245, 194, 0.55) calc(50% - var(--divider-gap) - 6%),
+    var(--accent-border)     calc(50% - var(--divider-gap) - 2%),
+    transparent              calc(50% - var(--divider-gap)),
+    transparent              calc(50% + var(--divider-gap)),
+    var(--accent-border)     calc(50% + var(--divider-gap) + 2%),
+    rgba(94, 245, 194, 0.55) calc(50% + var(--divider-gap) + 6%),
+    var(--accent-border)                                94%,
+    transparent                                         100%
   );
   z-index: 2;
   pointer-events: none;
