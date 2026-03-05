@@ -1,10 +1,9 @@
 // src/animations/divider.js
-// Animates the section divider lines so they open in the center
-// when the Rubik's cube is near, creating a "parting" effect.
-// Uses lerp each RAF frame for smooth inercia.
+// Animates section divider lines, opening a gap as the cube approaches.
+// Gap size is computed from the cube's actual rendered width so it
+// works correctly on both desktop and mobile.
 
-const LERP    = 0.12; // smoothing factor — higher = snappier
-const MAX_GAP = 20;   // max half-width of gap in vw-% (total gap = 2x this)
+const LERP = 0.12; // smoothing / inercia
 
 export function initDividerAnimation() {
   const sections = Array.from(document.querySelectorAll('section:not(#hero)'));
@@ -12,12 +11,20 @@ export function initDividerAnimation() {
 
   if (!sections.length) return;
 
-  // Animated state per section
   const state = sections.map(() => ({ cur: 0 }));
 
-  // The zone around the line where the animation starts (px)
+  // Vertical zone (px) around the line where the animation activates
   function influenceRadius() {
     return cubeBg ? cubeBg.offsetHeight * 0.75 : window.innerHeight * 0.5;
+  }
+
+  // Half-gap needed to clear the cube, as % of viewport width.
+  // Reads the cube's actual rendered width so it adapts to any screen size.
+  function maxGap() {
+    if (!cubeBg) return 22;
+    const halfCubeVw = (cubeBg.offsetWidth / 2 / window.innerWidth) * 100;
+    // Add 5% buffer so the cube has room to breathe
+    return Math.min(halfCubeVw + 5, 44);
   }
 
   // Smooth ease-in-out curve (0 → 1)
@@ -26,20 +33,17 @@ export function initDividerAnimation() {
   }
 
   function tick() {
-    // Cube is position:fixed at 50vh — its vertical center is always here
     const cubeY  = window.innerHeight / 2;
     const radius = influenceRadius();
+    const gap    = maxGap();
 
     sections.forEach((section, i) => {
-      // The divider line sits at the very top of each section
       const lineY = section.getBoundingClientRect().top;
       const dist  = Math.abs(lineY - cubeY);
 
-      // Target gap: 0 when far, MAX_GAP when cube center is at the line
       const t         = dist < radius ? smoothstep(1 - dist / radius) : 0;
-      const targetGap = MAX_GAP * t;
+      const targetGap = gap * t;
 
-      // Lerp toward target for inercia feel
       state[i].cur += (targetGap - state[i].cur) * LERP;
 
       section.style.setProperty('--divider-gap', state[i].cur.toFixed(2) + '%');

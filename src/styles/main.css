@@ -211,7 +211,7 @@ section {
   section { scroll-snap-stop: always; }
 }
 
-/* ─── Section glow divider — gap controlled by JS via --divider-gap ── */
+/* ─── Section glow divider — gap driven by JS via --divider-gap ── */
 section:not(#hero) {
   --divider-gap: 0%;
 }
@@ -221,22 +221,22 @@ section:not(#hero)::after {
   top: 0; left: 0; right: 0;
   height: 1px;
   /*
-   * The gradient has two "wings" that meet at center when --divider-gap = 0%.
-   * JS sets --divider-gap (0% → ~20%) based on cube proximity,
-   * smoothly opening a hole for the cube to pass through.
+   * Two wings meet at center when --divider-gap = 0%.
+   * max()/min() clamps prevent gradient-stop inversion on small screens
+   * where the cube is nearly as wide as the viewport.
    */
   background: linear-gradient(
     to right,
-    transparent                                         0%,
-    var(--accent-border)                                6%,
-    rgba(94, 245, 194, 0.55) calc(50% - var(--divider-gap) - 6%),
-    var(--accent-border)     calc(50% - var(--divider-gap) - 2%),
-    transparent              calc(50% - var(--divider-gap)),
-    transparent              calc(50% + var(--divider-gap)),
-    var(--accent-border)     calc(50% + var(--divider-gap) + 2%),
-    rgba(94, 245, 194, 0.55) calc(50% + var(--divider-gap) + 6%),
-    var(--accent-border)                                94%,
-    transparent                                         100%
+    transparent                                                            0%,
+    var(--accent-border)                                                   3%,
+    rgba(94, 245, 194, 0.55) max(3%,  calc(50% - var(--divider-gap) - 5%)),
+    var(--accent-border)     max(3%,  calc(50% - var(--divider-gap) - 1%)),
+    transparent              max(3%,  calc(50% - var(--divider-gap))),
+    transparent              min(97%, calc(50% + var(--divider-gap))),
+    var(--accent-border)     min(97%, calc(50% + var(--divider-gap) + 1%)),
+    rgba(94, 245, 194, 0.55) min(97%, calc(50% + var(--divider-gap) + 5%)),
+    var(--accent-border)                                                   97%,
+    transparent                                                            100%
   );
   z-index: 2;
   pointer-events: none;
