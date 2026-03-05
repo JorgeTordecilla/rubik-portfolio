@@ -1,4 +1,4 @@
-/* ─── Stats row (hero) ───────────────────────── */
+/* ─── Stats row (hero) ────────────────────────── */
 .stats-row {
   display: flex;
   align-items: center;
@@ -58,7 +58,7 @@
   flex-shrink: 0;
 }
 
-/* ─── About ────────────────────────────────── */
+/* ─── About ──────────────────────────────────── */
 .about-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -116,7 +116,7 @@
   .stats-row { gap: 1.1rem; }
 }
 
-/* ─── Skills ────────────────────────────────── */
+/* ─── Skills ──────────────────────────────────── */
 .skills-grid {
   display: flex;
   flex-direction: column;
@@ -199,7 +199,7 @@
   transform: translateX(-50%) translateY(0);
 }
 
-/* ─── Projects ──────────────────────────────── */
+/* ─── Projects ──────────────────────────────────── */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -252,6 +252,7 @@
 .card-links {
   display: flex; flex-wrap: wrap; gap: 0.5rem;
   margin-top: 0.2rem;
+  align-items: center;
 }
 .card-links a {
   font-size: 0.82rem; font-weight: 600;
@@ -260,7 +261,35 @@
 }
 .card-links a:hover { opacity: 0.7; }
 
-/* ─── Contact ───────────────────────────────── */
+/* Badge: demo coming soon */
+.card-link-soon {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.04);
+  border: 1px dashed rgba(255,255,255,0.12);
+  border-radius: 100px;
+  padding: 0.22em 0.75em;
+  opacity: 0.65;
+}
+
+/* Badge: internal / NDA project */
+.card-link-internal {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.04);
+  border: 1px dashed rgba(255,255,255,0.12);
+  border-radius: 100px;
+  padding: 0.22em 0.75em;
+  opacity: 0.55;
+}
+
+/* ─── Contact ──────────────────────────────────── */
 @media (min-width: 821px) {
   .contact-inner {
     text-align: left;
