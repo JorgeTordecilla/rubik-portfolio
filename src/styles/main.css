@@ -218,23 +218,27 @@ section:not(#hero)::before {
   z-index: 0; pointer-events: none;
 }
 
-/* ─── Section top glow divider ──────────────────── */
+/* ─── Section top glow divider — abierto donde pasa el cubo ── */
 section:not(#hero)::after {
   content: '';
   position: absolute;
   top: 0;
-  left: 8%;
-  right: 8%;
+  left: 0;
+  right: 0;
   height: 1px;
   background: linear-gradient(
     to right,
     transparent 0%,
-    var(--accent-border) 20%,
-    rgba(94, 245, 194, 0.55) 50%,
-    var(--accent-border) 80%,
+    rgba(94, 245, 194, 0.35) 8%,
+    rgba(94, 245, 194, 0.65) 20%,
+    var(--accent-border) 32%,
+    transparent 40%,
+    transparent 60%,
+    var(--accent-border) 68%,
+    rgba(94, 245, 194, 0.65) 80%,
+    rgba(94, 245, 194, 0.35) 92%,
     transparent 100%
   );
-  box-shadow: 0 0 14px 1px rgba(94, 245, 194, 0.18);
   z-index: 2;
   pointer-events: none;
 }
