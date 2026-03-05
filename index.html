@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#07060a" />
+  <meta name="description" content="Jorge Iván Tordecilla — Software Engineer especializado en automatización, IA y chatbots. Colombia." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jorgetordecilla.github.io/JorgeTordecillaPortfolio/" />
+  <meta property="og:title" content="Jorge Iván Tordecilla — Software Engineer" />
+  <meta property="og:description" content="Software Engineer especializado en automatización, IA y chatbots que resuelven lo que importa." />
+  <meta property="og:image" content="https://jorgetordecilla.github.io/JorgeTordecillaPortfolio/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://jorgetordecilla.github.io/JorgeTordecillaPortfolio/og.png" />
+
+  <title>Jorge Iván Tordecilla</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preload" href="/profile.webp" as="image" type="image/webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/styles/main.css" />
+  <link rel="stylesheet" href="/src/styles/sections.css" />
+</head>
+<body>
+
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <div id="loader">
+    <div class="loader-inner">
+      <div class="loader-bar"><div class="loader-fill"></div></div>
+      <p class="loader-text">Iniciando</p>
+    </div>
+  </div>
+
+  <div id="jt-brand">JT</div>
+
+  <a href="mailto:sllower166@gmail.com" id="contact-float" aria-label="Enviar email">
+    <span class="contact-float-icon">✉</span>
+    <span class="contact-float-text">Hablemos</span>
+  </a>
+
+  <aside id="section-nav" aria-hidden="true">
+    <div class="snav-item active" data-section="hero">
+      <span class="snav-label">Inicio</span>
+      <span class="snav-line"></span>
+    </div>
+    <div class="snav-item" data-section="about">
+      <span class="snav-label">Sobre mí</span>
+      <span class="snav-line"></span>
+    </div>
+    <div class="snav-item" data-section="skills">
+      <span class="snav-label">Habilidades</span>
+      <span class="snav-line"></span>
+    </div>
+    <div class="snav-item" data-section="projects">
+      <span class="snav-label">Proyectos</span>
+      <span class="snav-line"></span>
+    </div>
+    <div class="snav-item" data-section="contact">
+      <span class="snav-label">Contacto</span>
+      <span class="snav-line"></span>
+    </div>
+  </aside>
+
+  <!-- Gradient mesh background (behind cube) -->
+  <div id="gradient-bg"></div>
+
+  <div id="cube-bg">
+    <canvas id="rubik-canvas"></canvas>
+  </div>
+
+  <main id="scroll-container">
+
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-text">
+        <p class="hero-eyebrow fade-up">Jorge Iván Tordecilla · Colombia</p>
+        <h1 class="fade-up delay-1">El caos tiene<br><em>solución.</em></h1>
+        <p class="hero-sub fade-up delay-2">No escribo código — <strong>elimino trabajo repetitivo.</strong><br>
+          Backends, agentes IA y chatbots multicanal que ya están en producción.<span id="blink-cursor">|</span></p>
+        <a href="mailto:sllower166@gmail.com" class="btn-ghost hero-cta fade-up delay-3">Hablemos →</a>
+
+        <div class="stats-row fade-up delay-3">
+          <div class="stat">
+            <span class="stat-num" data-target="4" data-suffix="+">0+</span>
+            <span class="stat-lbl">años de exp.</span>
+          </div>
+          <div class="stat-sep"></div>
+          <div class="stat">
+            <span class="stat-num" data-target="3" data-suffix="">0</span>
+            <span class="stat-lbl">empresas</span>
+          </div>
+          <div class="stat-sep"></div>
+          <div class="stat">
+            <span class="stat-num" data-target="30" data-suffix="%">0%</span>
+            <span class="stat-lbl">más rápido</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-hint">
+        <span class="scroll-hint-text">scroll</span>
+        <div class="scroll-hint-line"></div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-inner">
+        <div class="section-label fade-up">01 / Sobre mí</div>
+        <div class="about-grid">
+          <h2 class="fade-up">Convierto problemas<br>complejos en<br><em>sistemas elegantes.</em></h2>
+          <div class="about-body fade-up delay-1">
+            <div class="about-photo-wrap">
+              <img src="/profile.webp" alt="Jorge Iván Tordecilla" class="about-photo" width="140" height="140" />
+            </div>
+            <p>Software Engineer con 4+ años de experiencia en automatización e IA. Actualmente en <strong>Juju</strong> — fintech de incentivos e IA conversacional — donde construyo la arquitectura de chatbots multicanal y automatizo flujos conversacionales, reduciendo los tiempos de implementación en un <strong>30%</strong>.</p>
+            <p>Aplico <strong>Clean Architecture</strong>, Hexagonal, TDD y DDD en producción. He colaborado en <strong>Ceiba Software</strong> (2021–2023) y <strong>Oderman</strong> (2023), y hoy aplico IA generativa día a día en Juju (Medellín).</p>
+            <div class="exp-pills">
+              <span class="pill">Ceiba Software '21–'23</span>
+              <span class="pill">Oderman '23</span>
+              <span class="pill">Juju · IA & Chatbots (actual)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="section-inner">
+        <div class="section-label fade-up">02 / Habilidades</div>
+        <h2 class="fade-up">Las herramientas<br><em>correctas.</em></h2>
+        <div class="skills-grid fade-up delay-1"></div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="section-inner">
+        <div class="section-label fade-up">03 / Proyectos</div>
+        <h2 class="fade-up">El trabajo habla<br><em>por sí solo.</em></h2>
+        <div class="projects-grid fade-up delay-1"></div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-inner contact-inner">
+        <div class="section-label fade-up">04 / Contacto</div>
+        <h2 class="fade-up">¿Listo para ordenar<br><em>tu caos?</em></h2>
+        <p class="contact-sub fade-up delay-1">Cada gran producto empezó con una conversación.<br>No dudes en escribirme — respondo rápido.</p>
+        <div class="social-links fade-up delay-2">
+          <a href="https://github.com/JorgeTordecilla" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/jorge-tordecilla-1b0ba11ba/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="mailto:sllower166@gmail.com">Email</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="site-footer">
+    <span>&copy; 2026 Jorge Iván Tordecilla</span>
+    <span>Hecho con ♥ en Colombia</span>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
