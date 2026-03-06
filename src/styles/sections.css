@@ -137,17 +137,16 @@
   transform: translateX(-50%);
   border: 4px solid transparent; border-top-color: var(--accent-border);
 }
-.skill-chip:hover .chip-tip    { opacity: 1; transform: translateX(-50%) translateY(0); }
-.skill-chip.chip-peek .chip-tip { opacity: 1; transform: translateX(-50%) translateY(0); }
+.skill-chip:hover .chip-tip     { opacity: 1; transform: translateX(-50%) translateY(0); }
+.skill-chip.chip-peek .chip-tip  { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* ─ Beacon: ring-pulse that signals "hover me" ───────────────── */
+/* ─ Beacon: double ring-pulse that signals “hover me” ───────── */
 .skill-chip.chip-beacon {
   border-color: var(--accent-border);
   color: var(--accent);
   background: var(--accent-dim);
   animation: chipBeacon 0.75s ease-out;
 }
-/* Two rings pulse out — first strong, second softer */
 @keyframes chipBeacon {
   0%   { box-shadow: 0 0 0 0   rgba(94,245,194,0.65); }
   45%  { box-shadow: 0 0 0 9px rgba(94,245,194,0);    }
@@ -268,14 +267,22 @@
   transition: color var(--transition), border-color var(--transition);
 }
 .contact-email-big:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* FIX P1: restore max-width for contact on desktop (remove max-width:none).
+   FIX P2: reduce gap from 2.8rem to 1.8rem — less dead space between elements. */
 @media (min-width: 821px) {
-  .contact-inner { text-align: left; align-items: flex-start; margin: 0; max-width: none; }
+  .contact-inner {
+    text-align: left;
+    align-items: flex-start;
+    margin: 0;
+    gap: 1.8rem;
+  }
 }
 
 /* ─── Easter egg hint ───────────────────────────── */
+/* FIX P1: removed margin-top: 2.8rem — gap already provides spacing */
 .easter-hint {
   display: flex; align-items: center; gap: 0.55rem;
-  margin-top: 2.8rem;
   font-family: 'Courier New', Courier, monospace;
   font-size: 0.68rem; letter-spacing: 0.09em;
   color: var(--accent); opacity: 0;
