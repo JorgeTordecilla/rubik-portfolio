@@ -24,6 +24,11 @@
   --accent-glow: 0 0 40px rgba(94,245,194,0.22);
   --shadow: 0 24px 70px rgba(0,0,0,0.5);
   --cube-solved-glow: 0 0 120px 20px rgba(94,245,194,0.28);
+  /* z-index scale — named so changes don’t silently break stacking */
+  --z-grain:       9997;
+  --z-loader:      9999;
+  --z-cursor-ring: 9999;
+  --z-cursor-dot:  10000;
 }
 @media (min-width: 821px) {
   :root { --cube-size: clamp(480px, 55vmin, 700px); }
@@ -45,7 +50,6 @@ body {
 }
 
 /* ─── Focus-visible ─────────────────────────────── */
-/* Visible only on keyboard navigation; invisible on mouse click */
 :focus { outline: none; }
 :focus-visible {
   outline: 2px solid var(--accent);
@@ -57,7 +61,7 @@ body {
 body::after {
   content: '';
   position: fixed; inset: 0;
-  z-index: 9997; pointer-events: none; opacity: 0.038;
+  z-index: var(--z-grain); pointer-events: none; opacity: 0.038;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 256px 256px;
@@ -80,7 +84,7 @@ body::after {
   display: none; position: fixed;
   width: 6px; height: 6px; border-radius: 50%;
   background: var(--accent); pointer-events: none;
-  z-index: 10000; transform: translate(-50%, -50%);
+  z-index: var(--z-cursor-dot); transform: translate(-50%, -50%);
   opacity: 0; transition: opacity 0.2s, transform 0.1s;
   will-change: left, top;
 }
@@ -88,7 +92,7 @@ body::after {
   display: none; position: fixed;
   width: 32px; height: 32px; border-radius: 50%;
   border: 1.5px solid rgba(94,245,194,0.35);
-  pointer-events: none; z-index: 9999;
+  pointer-events: none; z-index: var(--z-cursor-ring);
   transform: translate(-50%, -50%);
   opacity: 0;
   transition: width 0.25s ease, height 0.25s ease,
@@ -179,7 +183,7 @@ body.cube-solved #cube-bg { filter: drop-shadow(0 0 40px rgba(94,245,194,0.55));
 #loader {
   position: fixed; inset: 0; background: var(--bg);
   display: flex; align-items: center; justify-content: center;
-  z-index: 9999; transition: opacity 0.6s;
+  z-index: var(--z-loader); transition: opacity 0.6s;
 }
 .loader-inner { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; }
 .loader-bar { width: 160px; height: 1px; background: var(--border); }
@@ -350,10 +354,16 @@ section:not(#hero) {
   .snav-label { display: none; }
   .snav-line { width: 6px; height: 6px; border-radius: 50%; background: var(--text-muted); opacity: 0.45; }
   .snav-item.active .snav-line { width: 18px; border-radius: 3px; background: var(--accent); opacity: 1; }
-  /* FIX P2: raise contact-float higher to avoid collision with section-nav pill */
-  #contact-float { bottom: 5.5rem; }
+  /* Merged all mobile overrides for #contact-float into one rule */
+  #contact-float {
+    bottom: 5.5rem;
+    padding: 0.6em;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    justify-content: center;
+  }
   .contact-float-text { display: none; }
-  #contact-float { padding: 0.6em; border-radius: 50%; width: 38px; height: 38px; justify-content: center; }
   #cube-bg { width: min(80vw, 320px); height: min(80vw, 320px); }
   #site-footer { flex-direction: column; gap: 0.4rem; text-align: center; }
   .scroll-hint-line { height: 24px; }

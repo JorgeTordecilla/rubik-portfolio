@@ -14,6 +14,11 @@ import { initJorgeEasterEgg }   from './animations/jorgeEasterEgg.js';
 document.documentElement.dataset.theme = 'dark';
 let rubikCube;
 
+/* ─── Module-level state ────────────────────────────── */
+// Tracks whether the easter egg hint has already animated in.
+// Kept as a module variable instead of a DOM property mutation.
+let easterHintShown = false;
+
 /* ─── Custom cursor ────────────────────────────── */
 const cursorDot  = document.getElementById('cursor-dot');
 const cursorRing = document.getElementById('cursor-ring');
@@ -130,10 +135,11 @@ if (contactEl) {
       setTimeout(() => document.body.classList.add('cube-solved'), 800);
       if (contactFloat) contactFloat.classList.add('contact-float--hidden');
 
-      // Easter egg hint: reveal after 3 s, only the first time
+      // Show the easter egg hint once — tracked via module variable,
+      // not via DOM property mutation (avoids antipattern hint._shown)
       const hint = document.querySelector('.easter-hint');
-      if (hint && !hint._shown) {
-        hint._shown = true;
+      if (hint && !easterHintShown) {
+        easterHintShown = true;
         setTimeout(() => hint.classList.add('easter-hint--visible'), 3000);
       }
     } else {
@@ -159,6 +165,9 @@ let sceneRotY    = 0;
 
 function animate() {
   requestAnimationFrame(animate);
+
+  // Skip rendering when the tab is in the background — saves GPU/CPU on hidden tabs
+  if (document.hidden) return;
 
   if (cursorRing) {
     rx += (cx - rx) * 0.1;
